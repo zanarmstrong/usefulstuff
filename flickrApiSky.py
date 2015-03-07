@@ -53,9 +53,10 @@ def createHourDayObject(inputPhotoData):
 
 def getFlickrData(searchText, city, cities):
 	k = []
-	# note - this just gets page 1 - 3, increase range value to get more pages (note - might be quite slow)
-	for i in range(3):
-		k.extend(flickr.photos.search(text=searchText, lat=cities[city]['lat'], lon= cities[city]['lon'], page = str(i))['photos']['photo'])
+	# note - this just gets page 1 - need to cycle through for other pages
+	for i in range(5):
+		m = flickr.photos.search(text=searchText, lat=cities[city]['lat'], lon= cities[city]['lon'], page = str(i + 1))['photos']['photo']
+		k.extend(m)
 	return k
 
 skySF = getFlickrData('sky', 'San Francisco', cityList)
